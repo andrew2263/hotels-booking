@@ -1,5 +1,7 @@
 import { sendData } from './api.js';
 import { isEscapeKey } from './util.js';
+import { storage } from './firebaseConfig.js';
+import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js';
 
 const adForm = document.querySelector('.ad-form');
 const adTitleInput = adForm.querySelector('#title');
@@ -137,14 +139,47 @@ const setAdFormSubmit = (onSuccess) => {
     evt.preventDefault();
 
     let obj = {};
+    let keys = [];
     const formData = new FormData(evt.target);
-    formData.forEach((value, key) => obj[key] = value);
 
-    sendData(
-      () => onSuccess(),
-      () => showMessage(errorMessageElement),
-      JSON.stringify(obj)
-    );
+    const avatarUpload = formData.get('avatar');
+    const imagesUpload = formData.get('images');
+
+    const avatarRef = ref(storage, `avatar/${ avatarUpload.name }`);
+    const imagesRef = ref(storage, `images/${ imagesUpload.name }`);
+
+    const uploadFiles = async (ref, data) => {
+      await uploadBytes(ref, data);
+      const url = await getDownloadURL(ref);
+      return url;
+    };
+
+    (async function () {
+      const imagesUrl = await uploadFiles(imagesRef, imagesUpload);
+      const avatarUrl = await uploadFiles(avatarRef, avatarUpload);
+
+      formData.forEach((value, key) => {
+        if (keys.includes(key)) {
+          obj[key] = `${obj[key]} ${value}`;
+        }
+        if (!keys.includes(key)) {
+          keys.push(key);
+          obj[key] = value;
+        }
+        if (key === 'images') {
+          obj[key] = imagesUrl;
+        }
+        if (key === 'avatar') {
+          obj[key] = avatarUrl;
+        }
+      });
+  
+      sendData(
+        () => onSuccess(),
+        () => showMessage(errorMessageElement),
+        JSON.stringify(obj)
+      );
+    })();
   });
 };
 
