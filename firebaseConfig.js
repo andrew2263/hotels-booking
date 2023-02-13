@@ -1,5 +1,8 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getStorage } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js';
+
+//import firebase from '../node_modules/firebase';
+
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD563AzuhZsQtAZxYJ47oJQbSqUsVg5xg0',

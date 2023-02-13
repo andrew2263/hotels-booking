@@ -1,7 +1,7 @@
 import { sendData } from './api.js';
 import { isEscapeKey } from './util.js';
-import { storage } from './firebaseConfig.js';
-import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js';
+import { storage } from '../firebaseConfig.js';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const adForm = document.querySelector('.ad-form');
 const adTitleInput = adForm.querySelector('#title');

@@ -11,14 +11,7 @@ const mapFiltersForm = document.querySelector('.map__filters');
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
 const RERENDER_DELAY = 500;
-/*
-const DATA = DUMMY_DATA.map(el => {
-    el.offer.price = Math.round(el.offer.price/75)
-    return el;
-});
 
-console.log(JSON.stringify(DATA));
-*/
 window.onload = () => {
   toggleFormState(adForm, 'ad-form--disabled');
   toggleFormState(mapFiltersForm, 'map__filters--disabled');
@@ -69,29 +62,6 @@ map
         resetMap();
       }, RERENDER_DELAY));
     }, alert);
-   /*
-    renderOffers(DATA, markerGroup);
-    setHousingType(debounce(() => {
-      renderOffers(DATA, markerGroup);
-      resetMap();
-    }, RERENDER_DELAY));
-    setHousingPrice(debounce(() => {
-      renderOffers(DATA, markerGroup);
-      resetMap();
-    }, RERENDER_DELAY));
-    setHousingRooms(debounce(() => {
-      renderOffers(DATA, markerGroup);
-      resetMap();
-    }, RERENDER_DELAY));
-    setHousingGuests(debounce(() => {
-      renderOffers(DATA, markerGroup);
-      resetMap();
-    }, RERENDER_DELAY));
-    setHousingFeatures(debounce(() => {
-      renderOffers(DATA, markerGroup);
-      resetMap();
-    }, RERENDER_DELAY));
-    */
   })
   .setView({
     lat: 52.5247197,
@@ -123,17 +93,4 @@ resetButton.addEventListener('click', (evt) => {
   resetMap();
 });
 
-/*
-async function addDummyData(requestData) {
-  await fetch('https://hotelsbooking-19663-default-rtdb.firebaseio.com/data.json', {
-    method: 'POST',
-    body: JSON.stringify(requestData),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  });
-}
-
-addDummyData(DATA);
-*/
 setAdFormSubmit(onSuccess);
