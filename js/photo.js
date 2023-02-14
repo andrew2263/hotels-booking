@@ -25,23 +25,18 @@ const onAvatarChange = () => {
     addPhoto(avatarInput, avatarImgElement);
   });
 };
-/*
-const onOfferPhotoChange = () => {
-  
-};
-*/
 
-offerPhotoInput.addEventListener('change', () => {
-  addPhoto(offerPhotoInput, offerPhotoImgElement);
-  offerPhotoElement.appendChild(offerPhotoImgElement);
-});
+const onOfferPhotoChange = () => {
+  offerPhotoInput.addEventListener('change', () => {
+    addPhoto(offerPhotoInput, offerPhotoImgElement);
+    offerPhotoElement.appendChild(offerPhotoImgElement);
+  });  
+};
+
 
 const onFormResetPhoto = () => {
-  adForm.addEventListener('reset', () => {
-    avatarImgElement.src = '../img/muffin-grey.svg';
-    offerPhotoElement.innerHTML = '';
-  });
+  avatarImgElement.src = '../img/muffin-grey.svg';
+  offerPhotoElement.innerHTML = '';
 };
 
-//export { onAvatarChange, onOfferPhotoChange, onFormResetPhoto };
-export { onAvatarChange, onFormResetPhoto };
+export { onAvatarChange, onOfferPhotoChange, onFormResetPhoto };

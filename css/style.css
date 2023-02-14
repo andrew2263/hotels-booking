@@ -769,8 +769,8 @@ fieldset {
   background-position: 0 -70px;
 }
 
-.contacts__link--vk {
-  background-position: 0 -105px;
+.contacts__link--tg {
+  background-position: 0 -104px;
 }
 
 .contacts__link--twitter:hover,
@@ -788,8 +788,8 @@ fieldset {
   background-position: 0 -210px;
 }
 
-.contacts__link--vk:hover,
-.contacts__link--vk:focus {
+.contacts__link--tg:hover,
+.contacts__link--tg:focus {
   background-position: 0 -245px;
 }
 

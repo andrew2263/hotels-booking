@@ -8107,53 +8107,7 @@ const app = initializeApp(firebaseConfig);
 
 const storage = getStorage(app);
 
-;// CONCATENATED MODULE: ./js/photo.js
-
-
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-const avatarInput = adForm.querySelector('#avatar');
-const avatarImgElement = adForm.querySelector('.ad-form-header__preview').querySelector('img');
-const offerPhotoInput = adForm.querySelector('.ad-form__upload').querySelector('input[type=file]');
-const offerPhotoElement = adForm.querySelector('.ad-form__photo');
-const offerPhotoImgElement = document.createElement('img');
-offerPhotoImgElement.width = 70;
-offerPhotoImgElement.height = 70;
-
-const addPhoto = (fileInput, photoElement) => {
-  const file = fileInput.files[0];
-  const fileName = file.name.toLowerCase();
-
-  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
-
-  if (matches) {
-    photoElement.src = URL.createObjectURL(file);
-  }
-};
-
-const onAvatarChange = () => {
-  avatarInput.addEventListener('change', () => {
-    addPhoto(avatarInput, avatarImgElement);
-  });
-};
-
-const onOfferPhotoChange = () => {
-  offerPhotoInput.addEventListener('change', () => {
-    addPhoto(offerPhotoInput, offerPhotoImgElement);
-    offerPhotoElement.appendChild(offerPhotoImgElement);
-  });
-};
-
-const onFormResetPhoto = () => {
-  adForm.addEventListener('reset', () => {
-    avatarImgElement.src = '../img/muffin-grey.svg';
-    offerPhotoElement.innerHTML = '';
-  });
-};
-
-
-
 ;// CONCATENATED MODULE: ./js/form.js
-
 
 
 
@@ -8172,6 +8126,8 @@ const errorMessageElement = errorTemplate.querySelector('.error');
 const errorButton = errorMessageElement.querySelector('.error__button');
 const successTemplate = document.querySelector('#success').content;
 const successMessageElement = successTemplate.querySelector('.success');
+const submittingTemplate = document.querySelector('#submitting').content;
+const submittingMessageElement = submittingTemplate.querySelector('.submitting');
 
 const toggleFormState = (form, inactiveClass) => {
   form.classList.toggle(inactiveClass);
@@ -8227,8 +8183,6 @@ const setAdTitle = () => {
     const minLength = Number(adTitleInput.attributes.minlength.value);
     const maxLength = Number(adTitleInput.attributes.maxlength.value);
     const valueLength = adTitleInput.value.length;
-
-    console.log('input title');
   
     if (valueLength < minLength) {
       adTitleInput.setCustomValidity(`Ещё ${ minLength - valueLength } символов`);
@@ -8240,16 +8194,16 @@ const setAdTitle = () => {
   });
 };
 
-adTypeInput.addEventListener('input', () => {
-  console.log('input type');
-  adPriceInput.min = setMinPrice(adTypeInput.value);
-  adPriceInput.placeholder = setMinPrice(adTypeInput.value);
-});
+const setAdType = () => {
+  adTypeInput.addEventListener('input', () => {
+    adPriceInput.min = setMinPrice(adTypeInput.value);
+    adPriceInput.placeholder = setMinPrice(adTypeInput.value);
+  });
+}
 
 const setAdPrice = () => {
   adPriceInput.addEventListener('input', () => {
     adPriceInput.min = setMinPrice(adTypeInput.value);
-    console.log('input price');
     if (adPriceInput.value < Number(adPriceInput.min)) {
       adPriceInput.setCustomValidity(`Минимальное значение: ${ adPriceInput.min }`);
     } else if (adPriceInput.value > Number(adPriceInput.max)) {
@@ -8262,14 +8216,12 @@ const setAdPrice = () => {
 
 const setAdTimein = () => {
   adTimeinInput.addEventListener('input', () => {
-    console.log('imput time in');
     adTimeoutInput.value = adTimeinInput.value;
   });
 };
 
 const setAdTimeout = () => {
   adTimeoutInput.addEventListener('input', () => {
-    console.log('input time out');
     adTimeinInput.value = adTimeoutInput.value;
   });
 };
@@ -8287,7 +8239,9 @@ const onMessageEscKeydown = (message) => (evt) => {
 
 function showMessage (message) {
   document.body.append(message);
-  document.addEventListener('keydown', onMessageEscKeydown(message));
+  if (message !== submittingMessageElement) {
+    document.addEventListener('keydown', onMessageEscKeydown(message));
+  }
 }
 
 function closeMessage (message) {
@@ -8309,16 +8263,16 @@ errorMessageElement.addEventListener('click', () => {
 
 const setAdFormSubmit = (onSuccess) => {
   setAdTitle();
+  setAdType();
   setAdPrice();
   setAdTimein();
   setAdTimeout();
   setAdCapacity();
 
-  onAvatarChange();
-  onOfferPhotoChange();
-
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
+
+    showMessage(submittingMessageElement);
 
     let obj = {};
     let keys = [];
@@ -8357,8 +8311,14 @@ const setAdFormSubmit = (onSuccess) => {
       });
   
       sendData(
-        () => onSuccess(),
-        () => showMessage(errorMessageElement),
+        () => {
+          closeMessage(submittingMessageElement);
+          onSuccess();
+        },
+        () => {
+          closeMessage(submittingMessageElement);
+          showMessage(errorMessageElement)
+        },
         JSON.stringify(obj)
       );
     })();
@@ -8587,10 +8547,53 @@ const renderOffers = (offers, mapElement) => {
 
 
 
+;// CONCATENATED MODULE: ./js/photo.js
+
+
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const avatarInput = adForm.querySelector('#avatar');
+const avatarImgElement = adForm.querySelector('.ad-form-header__preview').querySelector('img');
+const offerPhotoInput = adForm.querySelector('.ad-form__upload').querySelector('input[type=file]');
+const offerPhotoElement = adForm.querySelector('.ad-form__photo');
+const offerPhotoImgElement = document.createElement('img');
+offerPhotoImgElement.width = 70;
+offerPhotoImgElement.height = 70;
+
+const addPhoto = (fileInput, photoElement) => {
+  const file = fileInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
+
+  if (matches) {
+    photoElement.src = URL.createObjectURL(file);
+  }
+};
+
+const onAvatarChange = () => {
+  avatarInput.addEventListener('change', () => {
+    addPhoto(avatarInput, avatarImgElement);
+  });
+};
+
+const onOfferPhotoChange = () => {
+  offerPhotoInput.addEventListener('change', () => {
+    addPhoto(offerPhotoInput, offerPhotoImgElement);
+    offerPhotoElement.appendChild(offerPhotoImgElement);
+  });  
+};
+
+
+const onFormResetPhoto = () => {
+  avatarImgElement.src = '../img/muffin-grey.svg';
+  offerPhotoElement.innerHTML = '';
+};
+
+
+
 ;// CONCATENATED MODULE: ./js/main.js
 
 
-// import { setAdTitle, setAdPrice, setAdTimein, setAdTimeout, setAdCapacity } from './form.js';
 
 
 
@@ -8674,6 +8677,7 @@ marker.on('moveend', (evt) => {
 
 const onSuccess = () => {
   adForm.reset();
+  onFormResetPhoto();
   showMessage(successMessageElement);
   resetMap();
 };
@@ -8685,6 +8689,8 @@ resetButton.addEventListener('click', (evt) => {
   resetMap();
 });
 
+onAvatarChange();
+onOfferPhotoChange();
 setAdFormSubmit(onSuccess);
 
 // EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js

@@ -73,8 +73,6 @@ const setAdTitle = () => {
     const minLength = Number(adTitleInput.attributes.minlength.value);
     const maxLength = Number(adTitleInput.attributes.maxlength.value);
     const valueLength = adTitleInput.value.length;
-
-    console.log('input title');
   
     if (valueLength < minLength) {
       adTitleInput.setCustomValidity(`Ещё ${ minLength - valueLength } символов`);
@@ -86,16 +84,16 @@ const setAdTitle = () => {
   });
 };
 
-adTypeInput.addEventListener('input', () => {
-  console.log('input type');
-  adPriceInput.min = setMinPrice(adTypeInput.value);
-  adPriceInput.placeholder = setMinPrice(adTypeInput.value);
-});
+const setAdType = () => {
+  adTypeInput.addEventListener('input', () => {
+    adPriceInput.min = setMinPrice(adTypeInput.value);
+    adPriceInput.placeholder = setMinPrice(adTypeInput.value);
+  });
+}
 
 const setAdPrice = () => {
   adPriceInput.addEventListener('input', () => {
     adPriceInput.min = setMinPrice(adTypeInput.value);
-    console.log('input price');
     if (adPriceInput.value < Number(adPriceInput.min)) {
       adPriceInput.setCustomValidity(`Минимальное значение: ${ adPriceInput.min }`);
     } else if (adPriceInput.value > Number(adPriceInput.max)) {
@@ -108,14 +106,12 @@ const setAdPrice = () => {
 
 const setAdTimein = () => {
   adTimeinInput.addEventListener('input', () => {
-    console.log('imput time in');
     adTimeoutInput.value = adTimeinInput.value;
   });
 };
 
 const setAdTimeout = () => {
   adTimeoutInput.addEventListener('input', () => {
-    console.log('input time out');
     adTimeinInput.value = adTimeoutInput.value;
   });
 };
@@ -157,6 +153,7 @@ errorMessageElement.addEventListener('click', () => {
 
 const setAdFormSubmit = (onSuccess) => {
   setAdTitle();
+  setAdType();
   setAdPrice();
   setAdTimein();
   setAdTimeout();

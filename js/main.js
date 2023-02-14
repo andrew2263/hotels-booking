@@ -1,11 +1,9 @@
 import { createOffer } from './api.js';
 import { adForm, toggleFormState, setAdFormSubmit, showMessage, successMessageElement } from './form.js';
-// import { setAdTitle, setAdPrice, setAdTimein, setAdTimeout, setAdCapacity } from './form.js';
 import { marker } from './map.js';
 import { renderOffers, setHousingType, setHousingPrice, setHousingRooms, setHousingGuests, setHousingFeatures } from './data.js';
 import { debounce } from './util.js';
-//import { onAvatarChange, onOfferPhotoChange, onFormResetPhoto } from './photo.js';
-import { onAvatarChange, onFormResetPhoto } from './photo.js';
+import { onAvatarChange, onOfferPhotoChange, onFormResetPhoto } from './photo.js';
 
 const resetButton = adForm.querySelector('.ad-form__reset');
 const addressInput = adForm.querySelector('#address');
@@ -85,6 +83,7 @@ marker.on('moveend', (evt) => {
 
 const onSuccess = () => {
   adForm.reset();
+  onFormResetPhoto();
   showMessage(successMessageElement);
   resetMap();
 };
@@ -97,5 +96,5 @@ resetButton.addEventListener('click', (evt) => {
 });
 
 onAvatarChange();
-//onOfferPhotoChange();
+onOfferPhotoChange();
 setAdFormSubmit(onSuccess);
