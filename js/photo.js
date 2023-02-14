@@ -20,7 +20,7 @@ const addPhoto = (fileInput, photoElement) => {
   }
 };
 
-avatarInput.addEventListener('change', () => {
+avatarInput.addEventListener('input', () => {
   addPhoto(avatarInput, avatarImgElement);
 });
 
