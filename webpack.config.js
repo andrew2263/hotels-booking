@@ -67,7 +67,8 @@ module.exports = {
       patterns: [
         { from: './fonts', to: './fonts' },
         { from: './images', to: './images' },
-        { from: './img', to: './img' }
+        { from: './img', to: './img' },
+        { from: './leaflet', to: './leaflet' }
       ]
     })
   ]

@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="leaflet/leaflet.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <title>Hotelsbooking</title>
@@ -77,7 +78,7 @@
               <img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">
             </div>
             <div class="ad-form__field">
-              <input type="file" id="avatar" name="avatar" class="ad-form-header__input visually-hidden" accept="image/jpeg,image/png,image/gif">
+              <input type="file" id="avatar" name="avatar" class="ad-form-header__input visually-hidden" accept="image/jpeg,image/png,image/gif" required>
               <label class="ad-form-header__drop-zone" for="avatar">Загрузить<br>фото...</label>
             </div>
             <p class="ad-form-header__info">Заполните все обязательные поля, назначьте цену, загрузите аватар и фото жилья. Придумайте интересное описание. Оно сделает объявление более живым и привлекательным. Получившееся объявление должно давать гостям полное представление о вашем жилье.</p>
@@ -161,7 +162,7 @@
           <label class="ad-form__label">Фотография жилья</label>
           <div class="ad-form__photo-container">
             <div class="ad-form__upload">
-              <input type="file" id="images" name="images" class="ad-form__input visually-hidden" accept="image/jpeg,image/png,image/gif">
+              <input type="file" id="images" name="images" class="ad-form__input visually-hidden" accept="image/jpeg,image/png,image/gif" required>
               <label for="images" class="ad-form__drop-zone">Загрузить<br>фото...</label>
             </div>
             <div class="ad-form__photo"></div>
@@ -218,6 +219,13 @@
     </article>
   </template>
 
+  <!-- Сообщение о начале процесса отправки объявления -->
+  <template id="submitting">
+    <div class="submitting">
+      <p class="submitting__message">Ваше объявление<br>отправляется...</p>
+    </div>
+  </template>
+
   <!-- Сообщение об успешном создании объявления -->
   <template id="success">
     <div class="success">
@@ -232,8 +240,8 @@
       <button type="button" class="error__button">Попробовать снова</button>
     </div>
   </template>
-  <!--script src="leaflet/leaflet.js"></script>
-  <script src="leaflet/leaflet.js.map"></script-->
+  <script src="leaflet/leaflet.js"></script>
+  <script src="leaflet/leaflet.js.map"></script>
   <script src="index.js"></script>
 </body>
 </html>

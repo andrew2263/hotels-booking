@@ -20,16 +20,28 @@ const addPhoto = (fileInput, photoElement) => {
   }
 };
 
-avatarInput.addEventListener('input', () => {
-  addPhoto(avatarInput, avatarImgElement);
-});
+const onAvatarChange = () => {
+  avatarInput.addEventListener('change', () => {
+    addPhoto(avatarInput, avatarImgElement);
+  });
+};
+/*
+const onOfferPhotoChange = () => {
+  
+};
+*/
 
 offerPhotoInput.addEventListener('change', () => {
   addPhoto(offerPhotoInput, offerPhotoImgElement);
   offerPhotoElement.appendChild(offerPhotoImgElement);
 });
 
-adForm.addEventListener('reset', () => {
-  avatarImgElement.src = '../img/muffin-grey.svg';
-  offerPhotoElement.innerHTML = '';
-});
+const onFormResetPhoto = () => {
+  adForm.addEventListener('reset', () => {
+    avatarImgElement.src = '../img/muffin-grey.svg';
+    offerPhotoElement.innerHTML = '';
+  });
+};
+
+//export { onAvatarChange, onOfferPhotoChange, onFormResetPhoto };
+export { onAvatarChange, onFormResetPhoto };

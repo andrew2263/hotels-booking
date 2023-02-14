@@ -16,6 +16,8 @@ const errorMessageElement = errorTemplate.querySelector('.error');
 const errorButton = errorMessageElement.querySelector('.error__button');
 const successTemplate = document.querySelector('#success').content;
 const successMessageElement = successTemplate.querySelector('.success');
+const submittingTemplate = document.querySelector('#submitting').content;
+const submittingMessageElement = submittingTemplate.querySelector('.submitting');
 
 const toggleFormState = (form, inactiveClass) => {
   form.classList.toggle(inactiveClass);
@@ -63,47 +65,64 @@ const onRoomsChange = () => {
   const roomNumber = adRoomNumberInput.value;
   const capacityNumber = Number(adCapacityInput.value);
   adCapacityInput.setCustomValidity(roomsToCapacities[roomNumber].includes(capacityNumber) ? '' : 'Количество гостей больше, чем комнат');
+  adCapacityInput.reportValidity();
 };
 
-adTitleInput.addEventListener('input', () => {
-  const minLength = Number(adTitleInput.attributes.minlength.value);
-  const maxLength = Number(adTitleInput.attributes.maxlength.value);
-  const valueLength = adTitleInput.value.length;
+const setAdTitle = () => {
+  adTitleInput.addEventListener('input', () => {
+    const minLength = Number(adTitleInput.attributes.minlength.value);
+    const maxLength = Number(adTitleInput.attributes.maxlength.value);
+    const valueLength = adTitleInput.value.length;
 
-  if (valueLength < minLength) {
-    adTitleInput.setCustomValidity(`Ещё ${ minLength - valueLength } символов`);
-  } else if (valueLength > maxLength) {
-    adTitleInput.setCustomValidity(`Удалите лишние ${ valueLength - maxLength } символов`);
-  } else {
-    adTitleInput.setCustomValidity('');
-  }
-});
+    console.log('input title');
+  
+    if (valueLength < minLength) {
+      adTitleInput.setCustomValidity(`Ещё ${ minLength - valueLength } символов`);
+    } else if (valueLength > maxLength) {
+      adTitleInput.setCustomValidity(`Удалите лишние ${ valueLength - maxLength } символов`);
+    } else {
+      adTitleInput.setCustomValidity('');
+    }
+  });
+};
 
 adTypeInput.addEventListener('input', () => {
+  console.log('input type');
   adPriceInput.min = setMinPrice(adTypeInput.value);
   adPriceInput.placeholder = setMinPrice(adTypeInput.value);
 });
 
-adPriceInput.addEventListener('input', () => {
-  adPriceInput.min = setMinPrice(adTypeInput.value);
-  if (adPriceInput.value < Number(adPriceInput.min)) {
-    adPriceInput.setCustomValidity(`Минимальное значение: ${ adPriceInput.min }`);
-  } else if (adPriceInput.value > Number(adPriceInput.max)) {
-    adPriceInput.setCustomValidity(`Максимальное значение: ${ adPriceInput.max }`);
-  } else {
-    adPriceInput.setCustomValidity('');
-  }
-});
+const setAdPrice = () => {
+  adPriceInput.addEventListener('input', () => {
+    adPriceInput.min = setMinPrice(adTypeInput.value);
+    console.log('input price');
+    if (adPriceInput.value < Number(adPriceInput.min)) {
+      adPriceInput.setCustomValidity(`Минимальное значение: ${ adPriceInput.min }`);
+    } else if (adPriceInput.value > Number(adPriceInput.max)) {
+      adPriceInput.setCustomValidity(`Максимальное значение: ${ adPriceInput.max }`);
+    } else {
+      adPriceInput.setCustomValidity('');
+    }
+  });
+};
 
-adTimeinInput.addEventListener('input', () => {
-  adTimeoutInput.value = adTimeinInput.value;
-});
+const setAdTimein = () => {
+  adTimeinInput.addEventListener('input', () => {
+    console.log('imput time in');
+    adTimeoutInput.value = adTimeinInput.value;
+  });
+};
 
-adTimeoutInput.addEventListener('input', () => {
-  adTimeinInput.value = adTimeoutInput.value;
-});
+const setAdTimeout = () => {
+  adTimeoutInput.addEventListener('input', () => {
+    console.log('input time out');
+    adTimeinInput.value = adTimeoutInput.value;
+  });
+};
 
-adCapacityInput.addEventListener('input', onRoomsChange);
+const setAdCapacity = () => {
+  adCapacityInput.addEventListener('input', onRoomsChange);
+};
 
 const onMessageEscKeydown = (message) => (evt) => {
   if (isEscapeKey(evt)) {
@@ -114,7 +133,9 @@ const onMessageEscKeydown = (message) => (evt) => {
 
 function showMessage (message) {
   document.body.append(message);
-  document.addEventListener('keydown', onMessageEscKeydown(message));
+  if (message !== submittingMessageElement) {
+    document.addEventListener('keydown', onMessageEscKeydown(message));
+  }
 }
 
 function closeMessage (message) {
@@ -135,8 +156,16 @@ errorMessageElement.addEventListener('click', () => {
 });
 
 const setAdFormSubmit = (onSuccess) => {
+  setAdTitle();
+  setAdPrice();
+  setAdTimein();
+  setAdTimeout();
+  setAdCapacity();
+
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
+
+    showMessage(submittingMessageElement);
 
     let obj = {};
     let keys = [];
@@ -175,8 +204,14 @@ const setAdFormSubmit = (onSuccess) => {
       });
   
       sendData(
-        () => onSuccess(),
-        () => showMessage(errorMessageElement),
+        () => {
+          closeMessage(submittingMessageElement);
+          onSuccess();
+        },
+        () => {
+          closeMessage(submittingMessageElement);
+          showMessage(errorMessageElement)
+        },
         JSON.stringify(obj)
       );
     })();
