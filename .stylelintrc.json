@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "selector-class-pattern": "^[a-z-]+_?_?[a-z0-9-]*_?[a-z0-9-]*$",
+    "font-family-name-quotes": "always-unless-keyword",
+    "value-no-vendor-prefix": null,
+    "property-no-vendor-prefix": null
+  },
+  "extends": ["stylelint-config-standard"]
+}

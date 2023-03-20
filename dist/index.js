@@ -8327,12 +8327,14 @@ const setAdFormSubmit = (onSuccess) => {
 
 
 ;// CONCATENATED MODULE: ./js/map.js
+// eslint-disable-next-line
 const mainPinIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
+// eslint-disable-next-line
 const marker = L.marker(
   {
     lat: 52.5117197,
@@ -8345,12 +8347,14 @@ const marker = L.marker(
 );
 
 const createOfferMarker = (offer, map, popupElement) => {
+  // eslint-disable-next-line
   const offerIcon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
 
+  // eslint-disable-next-line
   const offerMarker = L.marker(
     {
       lat: offer.location.lat,
@@ -8602,7 +8606,9 @@ const onFormResetPhoto = () => {
 const resetButton = adForm.querySelector('.ad-form__reset');
 const addressInput = adForm.querySelector('#address');
 const mapFiltersForm = document.querySelector('.map__filters');
+// eslint-disable-next-line
 const main_map = L.map('map-canvas');
+// eslint-disable-next-line
 const markerGroup = L.layerGroup().addTo(main_map);
 const RERENDER_DELAY = 500;
 
@@ -8662,6 +8668,7 @@ main_map
     lng: 13.4293054,
   }, 13);
 
+// eslint-disable-next-line
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {

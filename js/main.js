@@ -8,7 +8,9 @@ import { onAvatarChange, onOfferPhotoChange, onFormResetPhoto } from './photo.js
 const resetButton = adForm.querySelector('.ad-form__reset');
 const addressInput = adForm.querySelector('#address');
 const mapFiltersForm = document.querySelector('.map__filters');
+// eslint-disable-next-line
 const map = L.map('map-canvas');
+// eslint-disable-next-line
 const markerGroup = L.layerGroup().addTo(map);
 const RERENDER_DELAY = 500;
 
@@ -68,6 +70,7 @@ map
     lng: 13.4293054,
   }, 13);
 
+// eslint-disable-next-line
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {

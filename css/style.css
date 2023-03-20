@@ -41,18 +41,15 @@ body {
   max-width: 1200px;
   min-width: 1000px;
   margin: 0 auto;
-
   color: #353535;
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 16px;
-
   background-color: #f0f0ea;
 }
 
 fieldset {
   margin: 0;
   padding: 0;
-
   border: 0;
 }
 
@@ -95,16 +92,14 @@ fieldset {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-
   overflow: hidden;
 }
 
 .map__canvas {
   width: 100%;
   height: 500px;
-  background-color: #dddddd;
+  background-color: #ddd;
 }
-
 
 /**
  * Фильтры объявления
@@ -112,7 +107,7 @@ fieldset {
 
 .map__filters-container {
   width: 100%;
-  background-color: #000000;
+  background-color: #000;
 }
 
 .map__filters {
@@ -125,15 +120,12 @@ fieldset {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-
   width: 960px;
   height: 50px;
   margin: 0 auto;
-
   -webkit-transition: opacity 300ms ease-in;
   -o-transition: opacity 300ms ease-in;
   transition: opacity 300ms ease-in;
-
   opacity: 1;
 }
 
@@ -145,11 +137,9 @@ fieldset {
 .map__filter {
   height: 30px;
   margin-right: 10px;
-
   font-size: 14px;
   vertical-align: middle;
   cursor: pointer;
-
   border: 1px solid transparent;
 }
 
@@ -166,20 +156,16 @@ fieldset {
 .map__feature {
   display: inline-block;
   overflow: hidden;
-
   width: 30px;
   height: 28px;
-
   font-size: 0;
   vertical-align: middle;
   cursor: pointer;
-
   background-color: #f8f8f8;
   background-image: url("../img/sprite-feature.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 25px 345px;
-
   border-radius: 3px;
 }
 
@@ -236,22 +222,22 @@ fieldset {
           box-shadow: inset 0 0 0 1px #71c1ef;
 }
 
-.map__feature:focus,
-.map__checkbox:focus + .map__feature {
-   -webkit-box-shadow: 0 0 2px 2px #6160c4;
-           box-shadow: 0 0 2px 2px #6160c4;
- }
-
 .map__feature:active {
   -webkit-box-shadow: none;
           box-shadow: none;
   background-color: #6160c4;
 }
 
+.map__feature:focus,
+.map__checkbox:focus + .map__feature {
+   -webkit-box-shadow: 0 0 2px 2px #6160c4;
+           box-shadow: 0 0 2px 2px #6160c4;
+ }
+
 .map__checkbox:checked + .map__feature {
   background-color: #6160c4;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  -webkit-box-shadow: 0 1px 3px rgb(0 0 0 / 20%) inset;
+          box-shadow: 0 1px 3px rgba(0 0 0 / 20%) inset;
 }
 
 
@@ -266,7 +252,6 @@ fieldset {
 .notice__title {
   margin-top: 0;
   margin-bottom: 20px;
-
   font-size: 28px;
   font-weight: 700;
 }
@@ -277,7 +262,6 @@ fieldset {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-
   width: 100%;
 }
 
@@ -311,15 +295,11 @@ fieldset {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-
   margin-right: 10px;
   padding: 0 15px;
-
   width: 70px;
   height: 70px;
-
   text-align: center;
-
   border-radius: 5px;
   background-color: #dadada;
 }
@@ -339,14 +319,11 @@ fieldset {
 .ad-form-header__drop-zone {
   height: 70px;
   padding: 20px 10px 5px;
-
   text-align: center;
   font-size: 14px;
-  color: #999999;
-
+  color: #999;
   border: dashed 1px #c7c7c7;
   border-radius: 5px;
-
   cursor: pointer;
 }
 
@@ -365,7 +342,6 @@ fieldset {
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
   min-height: 90px;
-
   font-size: 14px;
 }
 
@@ -384,16 +360,24 @@ fieldset {
 .ad-form__element select,
 .ad-form__element textarea {
   width: calc(100% - 20px);
-
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 18px;
-
   height: 42px;
   padding-left: 14px;
-
   background-color: white;
   border: 1px solid #d9d9d3;
   border-radius: 4px;
+}
+
+.ad-form__element--time select {
+  width: calc(50% - 20px);
+}
+
+.ad-form textarea {
+  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
+  min-height: 230px;
+  padding-top: 10px;
 }
 
 .ad-form__element input:hover,
@@ -415,10 +399,6 @@ fieldset {
       flex-basis: 50%;
 }
 
-.ad-form__element--time select {
-  width: calc(50% - 20px);
-}
-
 .ad-form__element--time select:first-of-type {
   margin-right: 14px;
 }
@@ -430,22 +410,17 @@ fieldset {
 .features__label {
   display: inline-block;
   vertical-align: middle;
-
   width: 70px;
   height: 45px;
   margin-right: 2px;
-
   font-size: 0;
-
   border: solid 1px #eee;
   border-radius: 3px;
-
   background-color: #fafafa;
   background-image: url("../img/sprite-feature.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 35px 600px;
-
   cursor: pointer;
 }
 
@@ -472,8 +447,8 @@ fieldset {
 
 .features__checkbox:checked + .features__label {
   background-color: #6160c4;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+  -webkit-box-shadow: 0 1px 3px rgb(0 0 0 / 20%) inset;
+          box-shadow: 0 1px 3px rgba(0 0 0 / 20%) inset;
 }
 
 .features__label--wifi {
@@ -500,10 +475,6 @@ fieldset {
   background-position: 17px -217px;
 }
 
-.features__checkbox:checked + .features__label {
-  background-color: #6370bb;
-}
-
 .features__checkbox:checked + .features__label--wifi {
   background-position: 17px -297px;
 }
@@ -528,14 +499,6 @@ fieldset {
   background-position: 17px -464px;
 }
 
-.ad-form textarea {
-  width: calc(100% - 20px);
-  max-width: calc(100% - 20px);
-  min-height: 230px;
-
-  padding-top: 10px;
-}
-
 .ad-form__photo-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -549,7 +512,6 @@ fieldset {
   display: -ms-flexbox;
   display: flex;
   margin-right: 10px;
-
   width: 150px;
   min-height: 70px;
 }
@@ -566,14 +528,11 @@ fieldset {
   width: 100%;
   height: 70px;
   padding: 20px 10px 5px;
-
   text-align: center;
   font-size: 14px;
-  color: #999999;
-
+  color: #999;
   border: dashed 1px #c7c7c7;
   border-radius: 5px;
-
   cursor: pointer;
 }
 
@@ -591,10 +550,8 @@ fieldset {
 .ad-form__photo {
   margin-right: 10px;
   margin-bottom: 10px;
-
   width: 70px;
   height: 70px;
-
   background-color: #e4e4de;
   border-radius: 5px;
 }
@@ -603,20 +560,16 @@ fieldset {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
   padding: 40px 0;
-
   text-align: center;
 }
 
 .ad-form__submit {
   font-size: 22px;
   font-weight: 700;
-
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-
   width: 206px;
   height: 60px;
-
   background-color: white;
   border: 4px solid #71c1ef;
   border-radius: 8px;
@@ -633,7 +586,6 @@ fieldset {
 
 .ad-form__submit:active {
   outline: none;
-
   color: white;
   border-color: #566fd0;
   background-color: #566fd0;
@@ -642,10 +594,8 @@ fieldset {
 .ad-form__reset {
   margin: 0;
   padding: 0;
-
   font-size: 14px;
   text-decoration: underline;
-
   border: 0;
   background: none;
   cursor: pointer;
@@ -657,15 +607,13 @@ fieldset {
           box-shadow: 0 0 2px 2px #6160c4;
 }
 
-
 /* Футер
    ========================================================================== */
 
 .footer {
   margin-top: 30px;
   padding-top: 30px;
-  border-top: solid 1px #cccccc;
-
+  border-top: solid 1px #ccc;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -729,7 +677,6 @@ fieldset {
   margin: 0;
   padding: 0;
   list-style: none;
-
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -737,17 +684,13 @@ fieldset {
 
 .contacts__link {
   display: block;
-
   width: 29px;
   height: 29px;
   margin-left: 10px;
-
   font-size: 0;
-
   background-image: url("../img/sprite-social.svg");
   background-repeat: no-repeat;
   background-size: 29px 274px;
-
   cursor: pointer;
 }
 
@@ -793,12 +736,6 @@ fieldset {
   background-position: 0 -245px;
 }
 
-.contacts__link:focus {
-  -webkit-box-shadow: 0 0 2px 2px #6160c4;
-          box-shadow: 0 0 2px 2px #6160c4;
-}
-
-
 /* Вспомогательные экраны
    ========================================================================== */
 
@@ -808,9 +745,7 @@ fieldset {
 
 .popup {
   position: relative;
-
   width: 250px;
-
   font-size: 12px;
 }
 
@@ -825,11 +760,8 @@ fieldset {
   position: absolute;
   bottom: 100%;
   right: 0;
-
   padding: 0;
-
   font-size: 0;
-
   border: 0;
   background: none;
 }
@@ -849,23 +781,20 @@ fieldset {
 .popup__close::after {
   font-size: 50px;
   line-height: 40px;
-
   display: block;
   content: "×";
-
-  color: #000000;
+  color: #000;
 }
 
 .popup__title {
   margin: 0;
   margin-bottom: 10px;
-
   font-size: 16px;
   line-height: 18px;
 }
 
 .popup__text {
-  margin: 0 0 10px 0 !important;
+  margin: 0 0 10px !important;
 }
 
 .popup__text--price {
@@ -889,23 +818,16 @@ fieldset {
 .popup__features {
   margin: 0;
   padding: 0;
-
   list-style: none;
-}
-
-.popup__features {
   margin-bottom: 10px;
 }
 
 .popup__feature {
   display: inline-block;
   overflow: hidden;
-
   width: 30px;
   height: 28px;
-
   font-size: 0;
-
   background-image: url("../img/sprite-feature.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -968,28 +890,22 @@ fieldset {
   top: 0;
   left: 0;
   z-index: 1100;
-
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-
   width: 100%;
   height: 100%;
   overflow: auto;
-
   padding-top: 300px;
-
   text-align: center;
   vertical-align: middle;
-
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(0 0 0 / 80%);
 }
 
 .success__message,
 .error__message,
 .submitting__message {
   position: relative;
-
-  color: #ffffff;
+  color: #fff;
   font-size: 50px;
   font-weight: 700;
 }
@@ -999,17 +915,13 @@ fieldset {
 .submitting__message::before {
   content: "";
   position: absolute;
-
   top: -150px;
   left: 50%;
-
   width: 109px;
   height: 122px;
-
   background-image: url("../img/muffin-white.svg");
   background-position: center;
   background-repeat: no-repeat;
-
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -1021,13 +933,10 @@ fieldset {
 
 .error__button {
   padding: 10px;
-
   font-size: 22px;
   font-weight: 700;
-
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-
   color: white;
   border: 4px solid #6370bb;
   background-color: #6370bb;
@@ -1050,17 +959,13 @@ fieldset {
 
 .visually-hidden {
   position: absolute;
-
   width: 1px;
   height: 1px;
   margin: -1px;
   border: 0;
   padding: 0;
-
   white-space: nowrap;
-
   -webkit-clip-path: inset(100%);
-
           clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;

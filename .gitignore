@@ -5,8 +5,11 @@
 *.pdf
 *.psd
 *.sublime*
-build/
+dist/
 node_modules/
+screenshots/
 npm-debug.log*
 Thumbs.db
 .vscode/
+Contributing.md
+Workflow.md
