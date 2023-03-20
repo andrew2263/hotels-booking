@@ -2,7 +2,7 @@
 ## Features
 A landing page displaying accommodation ads on the map filtered by some features. This landing page has an user interface for adding your accomodation to the database.
 
-### Technologies used
+## Technologies used
 - HTML
 - CSS
 - Javascript ES6
